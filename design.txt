@@ -2,9 +2,14 @@ Summary: Nationwide Home Advisor is an Alexa skill that helps you buy your first
  
 The problem:
  - Potential home buyers don't know where to start
- - Getting finances in order is the most difficult and longest part
+ - my 89 year old grandma is a realator and her advice was getting finances in order is the most difficult and longest part
  - How much do I need to save for a down payment?
  - Wanted to talk to a Nationwide financial advisor, but only open on weekdays
+
+Benefits:
+ - division of labor
+ - fish where the fish are (avoiding high perssure sales situations)
+ - Help potential customers plan for the future
 
 Demo solution:
 

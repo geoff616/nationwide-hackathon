@@ -119,7 +119,7 @@ function getMortgageForPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Mortgage Amount: $75,000 in 19 months';
-    const speechOutput = `Plan saved. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage terms. With your credit score of 750 and current market rates, I expect you will pay five percent interest.`
+    const speechOutput = `I've saved your plan. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage terms. With your credit score of 750 and current market rates, I expect you will pay five percent interest.`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. Should we proceed with this plan?';
@@ -149,7 +149,7 @@ function getTalkToAdvisor(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Human Advisor: Call scheduled for Monday';
-    const speechOutput = 'Our human advisors don\'t work on the weekend, but we will call you on Monday. Nationwide is on your side.'; 
+    const speechOutput = 'Our human advisors don\'t work on the weekend, but I will have someone call you on Monday. Nationwide is on your side.'; 
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'would you like to talk to a human advisor?';
