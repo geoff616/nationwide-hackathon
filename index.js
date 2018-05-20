@@ -1,3 +1,4 @@
+
 'use strict';
 
 /**
@@ -48,10 +49,24 @@ function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Nationwide Home Advisor';
-    const speechOutput = `Hello Nationwide Hackathon. I am the Nationwide home advisor. Buying a home is the biggest and most complex purchase most people ever make. Luckily I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me a little about the type of home you are looking for. What zip code do you want to live in?`
+    const speechOutput = `Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people ever make. Luckily I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me a little about the type of home you are looking for. What zip code do you want to live in?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
-    const repromptText = 'I didn\'t catch that. What zip code do you want to live in?;
+    const repromptText = 'I didn\'t catch that. What zip code do you want to live in?;'
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+function getCityNameForZip(callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Prices in Palo Alto';
+    const speechOutput = `Great, let's look up the average prices in Palo Alto for the type of home you want. Are you looking for a condo, townhouse, or a single family home? How many bedrooms do you want? `
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. What type of home are you looking for?;'
     const shouldEndSession = false;
 
     callback(sessionAttributes,
@@ -156,8 +171,10 @@ function onIntent(intentRequest, session, callback) {
     const intentName = intentRequest.intent.name;
 
     // Dispatch to your skill's intent handlers
-    if (intentName === 'buyFirstHome') {
+    if (intentName === 'buyFirstHomeInit') {
         getWelcomeResponse(callback);
+    } else if (intentName === 'likeToLive') {
+        getCityNameForZip(callback);  
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
