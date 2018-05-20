@@ -49,10 +49,10 @@ function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Nationwide Home Advisor';
-    const speechOutput = `Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people will make. Fortunately I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for. What zip code do you want to live in?`
+    const speechOutput = `Hello Nationwide Hackathon. I am your home advisor. Buying a home is the biggest and most complex purchase most people will make. Fortunately I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for.`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
-    const repromptText = 'I didn\'t catch that. What zip code do you want to live in?;'
+    const repromptText = 'I didn\'t catch that. What type of home are you looking for?;'
     const shouldEndSession = false;
 
     callback(sessionAttributes,
@@ -91,7 +91,7 @@ function getRecommendedDownPayment(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Recommended Down Payment: 20%';
-    const speechOutput = `We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for closing costs and unexpected expenses. Can I access your bank account to design your savings plan?`
+    const speechOutput = `We recommend a 20% downpayment on your first home purchase, plus an additional 5% of funds in reserve. Can I access your bank account to design your savings plan?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. Can I access bank details?';
@@ -105,7 +105,7 @@ function getBankAccountInfo(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Bank Balance: $50,000';
-    const speechOutput = `Accessing now. It looks like you have 50,000 dollars in your savings account. This is 40% of the 125,000 dollars we reccomend saving. Your savings has been growing at 4,000 dollars per month over the last year. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months.`
+    const speechOutput = `You have 50,000 dollars in your savings account, which is 40% of the proposed plan. Your savings has been growing at 4,000 dollars per month. If you continue at this rate, we will have saved enough for your downpayment in 19 months. `
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. How much should we use?';
@@ -118,8 +118,8 @@ function getBankAccountInfo(intent, session, callback) {
 function getMortgageForPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
-    const cardTitle = 'Mortgage Amount: $75,000';
-    const speechOutput = `Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if your circumstances change. Let's move onto your mortgage payments. With your credit score and current market rates, I expect you will pay five percent interest.`
+    const cardTitle = 'Mortgage Amount: $75,000 in 19 months';
+    const speechOutput = `Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage payments. With your credit score and current market rates, I expect you will pay five percent interest.`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. Should we proceed with this plan?';
