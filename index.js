@@ -49,7 +49,7 @@ function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Nationwide Home Advisor';
-    const speechOutput = `Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people ever make. Luckily I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me a little about the type of home you are looking for. What zip code do you want to live in?`
+    const speechOutput = `Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people ever make. Luckily I work with a great team of financial advisors and we will develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for. What zip code do you want to live in?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What zip code do you want to live in?;'
@@ -62,16 +62,74 @@ function getWelcomeResponse(callback) {
 function getCityNameForZip(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
-    const cardTitle = 'Prices in Palo Alto';
+    const cardTitle = 'Homes In Palo Alto';
     const speechOutput = `Great, let's look up the average prices in Palo Alto for the type of home you want. Are you looking for a condo, townhouse, or a single family home? How many bedrooms do you want?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
-    const repromptText = 'I didn\'t catch that. What type of home are you looking for?;'
+    const repromptText = 'I didn\'t catch that. What type of home are you looking for?';
     const shouldEndSession = false;
 
     callback(sessionAttributes,
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
+
+function getInfoForHomeType(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = '2BR Prices in Palo Alto';
+    const speechOutput = `Looking at the prices on Zillow for two bedroom townhouses in Palo Alto, I see that the average price is 500,000 dollars. Do you know how much you want to put for a down payment?`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. Do you know how much you want to put for a down payment?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+function getRecommendedDownPayment(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Recommended Down Payment';
+    const speechOutput = `We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for emergencies and unexpected expenses. Can I access your bank account details to help develop your personalized savings plan?`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. Can I access bank details?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+function getBankAccountInfo(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Recommended Down Payment';
+    const speechOutput = `Great, thanks. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. How much should we use?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+function getSavingsPlan(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Recommended Down Payment';
+    const speechOutput = `Okay, 50,000 is 40% of the 125,000 dollars we reccomend saving. Let's figure out how to save the additional 75,000. Looking at your monthly account balance over the last year, your savings has been growing at 4,000 dollar per month. If you continue saving 4,000 dollars per month, you will have saved enough for your downpayment in 19 months. Do you think you will be able to maintain saving at this rate for 19 months?`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. Can I access bank details?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+getBankAccountInfo
 
 function handleSessionEndRequest(callback) {
     const cardTitle = 'Session Ended';
@@ -175,6 +233,14 @@ function onIntent(intentRequest, session, callback) {
         getWelcomeResponse(callback);
     } else if (intentName === 'likeToLive') {
         getCityNameForZip(intentRequest, session, callback);  
+    } else if (intentName === 'lookupHomeType') {
+        getInfoForHomeType(intentRequest, session, callback);  
+    } else if (intentName === 'recommendDownPayment') {
+        getRecommendedDownPayment(intentRequest, session, callback);  
+    } else if (intentName === 'accessBankAccount') {
+        getBankAccountInfo(intentRequest, session, callback);  
+    } else if (intentName === 'howMuchForDownPayment') {
+        getSavingsPlan(intentRequest, session, callback);  
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
