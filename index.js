@@ -76,7 +76,7 @@ function getCityNameForZip(intent, session, callback) {
 function getRecommendedDownPayment(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
-    const cardTitle = 'Recommended Down Payment';
+    const cardTitle = 'Recommended Down Payment: 20%';
     const speechOutput = `We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for emergencies and unexpected expenses. Can I access your bank account details to design a personalized savings plan?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
@@ -90,8 +90,8 @@ function getRecommendedDownPayment(intent, session, callback) {
 function getBankAccountInfo(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
-    const cardTitle = 'Recommended Down Payment';
-    const speechOutput = `Great, thanks. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?`
+    const cardTitle = 'Bank Balance: $50,000';
+    const speechOutput = `Accessing now. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. How much should we use?';
@@ -104,7 +104,7 @@ function getBankAccountInfo(intent, session, callback) {
 function getSavingsPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
-    const cardTitle = 'Recommended Down Payment';
+    const cardTitle = 'Savings Plan: $75,000';
     const speechOutput = `Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Let's figure out how to save the additional 75,000. Looking at your monthly account balance over the last year, your savings has been growing at 4,000 dollars per month. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. Do you think you will be able to maintain saving at this rate for 19 months?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
@@ -115,36 +115,65 @@ function getSavingsPlan(intent, session, callback) {
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
-getBankAccountInfo
-
 function handleSessionEndRequest(callback) {
     const cardTitle = 'Session Ended';
-    const speechOutput = 'Thank you for trying the Alexa Skills Kit sample. Have a nice day!';
+    const speechOutput = 'Thank you using Home Advisor. Nationwide is on your side.';
     // Setting this to true ends the session and exits the skill.
     const shouldEndSession = true;
 
     callback({}, buildSpeechletResponse(cardTitle, speechOutput, null, shouldEndSession));
 }
 
-function createFavoriteColorAttributes(favoriteColor) {
-    return {
-        favoriteColor,
-    };
-}
-
 function whatsMyMonthlyPayment(principal, duration, rate) {
-    var payment = amt*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1);
-    return payment;
+    var amt = principal, 
+        apr  = rate/1200,
+        term = duration * 12;
+    return Math.round(amt*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1));
 }
 
-function calculateInterestPaymentOnMortgage(principal, duration, rate) {
+
+function getMonthlyPayment(intent, session, callback) {
+    let cardTitle = '';
+    const principal = intent.slots.principal;
+    const rate = intent.slots.rate;
+    const duration = intent.slots.duration;
+    const sessionAttributes = {
+        principal, rate, duration
+    };
+    const monthlyPayment = whatsMyMonthlyPayment(principal, rate, duration);
+    const shouldEndSession = false;
+    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month`;
+    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+function calculateTotalInterestOnMortgage(principal, duration, rate) {
     // take the monthly rate and multiple by the number of months of the duration
-    return whatsMyMonthlyPayment(principal, duration, rate) * 12 * duration
+    return Math.round((whatsMyMonthlyPayment(principal, duration, rate) * 12 * duration) - principal);
+}
+
+function getTotalInterest(intent, session, callback) {
+    let cardTitle = '';
+    const principal = intent.slots.principal;
+    const rate = intent.slots.rate;
+    const duration = intent.slots.duration;
+    const sessionAttributes = {
+        principal, rate, duration
+    };
+    const totalInterest = calculateTotalInterestOnMortgage(principal, rate, duration);
+    const shouldEndSession = false;
+    const speechOutput = `You would pay a total of ${totalInterest} dollars in interest over ${duration} years`;
+    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
 /**
  * Sets the color in the session and prepares the speech to reply to the user.
- */
+
 function setColorInSession(intent, session, callback) {
     const cardTitle = intent.name;
     const favoriteColorSlot = intent.slots.Color;
@@ -194,7 +223,7 @@ function getColorFromSession(intent, session, callback) {
     callback(sessionAttributes,
          buildSpeechletResponse(intent.name, speechOutput, repromptText, shouldEndSession));
 }
-
+**/
 
 // --------------- Events -----------------------
 
@@ -234,7 +263,11 @@ function onIntent(intentRequest, session, callback) {
     } else if (intentName === 'accessBankAccount') {
         getBankAccountInfo(intentRequest, session, callback);  
     } else if (intentName === 'howMuchForDownPayment') {
-        getSavingsPlan(intentRequest, session, callback);  
+        getSavingsPlan(intentRequest, session, callback);
+    } else if (intentName === 'howMuchTotalInterest') {
+        getTotalInterest(intentRequest, session, callback);  
+    } else if (intentName === 'howMuchMonthlyPayment') {
+        getMonthlyPayment(intentRequest, session, callback);  
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
