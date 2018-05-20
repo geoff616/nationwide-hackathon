@@ -3,13 +3,10 @@ Summary: Nationwide Home Advisor is an Alexa skill that helps you buy your first
 The problem:
  - Potential home buyers don't know where to start
  - Getting finances in order is the most difficult and longest part
- - 
- - Couldn't get a financial advisor on the phone on the weekend
+ - How much do I need to save for a down payment?
+ - Wanted to talk to a Nationwide financial advisor, but only open on weekdays
 
-The solution:
- - 
-
-Demo: 
+Demo solution:
 
 G: ask nationwide to help me buy my first home. 
 
@@ -25,22 +22,20 @@ A: We recommend a 20% downpayment on your first home purchase, and keeping an ad
 
 G: Sure go ahead. 
 
-A: Accessing now. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?
-
-G: All of it
-
-A: Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Your savings has been growing at 4,000 dollars per month over the last year. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. 
-
-G: How long would it take if I only saved 3,500 per month?
-
-A: It will take 21 months to save your down payment. 
+A: Accessing now. It looks like you have 50,000 dollars in your savings account. This is 40% of the 125,000 dollars we reccomend saving. Your savings has been growing at 4,000 dollars per month over the last year. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. 
 
 G: Let's plan for 4,000 a month. 
 
-A: Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if anything changes. Let's move onto your mortgage payments. With your credit score and current rates, I expect you will pay five percent interest.
+A: Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if your circumstances change. Let's move onto your mortgage payments. With your credit score and current market rates, I expect you will pay five percent interest.
 
 G: What is my monthly payment on a seventy five thousand dollar mortgage with a five percent interest rate and a thirty year term?
 
-A: ...
+A: Your mortgage would be 403 dollars per month and you would pay a total of 70080 dollars in interest.
 
 G: What about a 15 year term?
+
+A: Your mortgage would be 593 dollars per month and you would pay a total of 31740 dollars in interest over 15 years.
+
+G: Great, can I talk to a financial advisor to learn more?
+
+A: Our human advisors don't work on the weekend, but we will call you on Monday. Nationwide is on your side. 

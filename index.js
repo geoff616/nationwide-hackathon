@@ -73,6 +73,20 @@ function getCityNameForZip(intent, session, callback) {
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
+function getCityNameForZip(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Homes In Palo Alto';
+    const speechOutput = `Looking at the prices on Zillow for two bedroom townhouses in Palo Alto, the average price is 500,000 dollars. Do you know how much you want to put for a down payment?`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. What type of home are you looking for?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
 function getRecommendedDownPayment(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
@@ -91,7 +105,7 @@ function getBankAccountInfo(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Bank Balance: $50,000';
-    const speechOutput = `Accessing now. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?`
+    const speechOutput = `Accessing now. It looks like you have 50,000 dollars in your savings account. This is 40% of the 125,000 dollars we reccomend saving. Your savings has been growing at 4,000 dollars per month over the last year. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months.`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. How much should we use?';
@@ -100,6 +114,22 @@ function getBankAccountInfo(intent, session, callback) {
     callback(sessionAttributes,
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
+
+function getMortgageForPlan(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Mortgage Amount: $75,000';
+    const speechOutput = `Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if your circumstances change. Let's move onto your mortgage payments. With your credit score and current market rates, I expect you will pay five percent interest.`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. Should we proceed with this plan?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+
 
 function getSavingsPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
@@ -115,9 +145,23 @@ function getSavingsPlan(intent, session, callback) {
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
+function getTalkToAdvisor(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Human Advisor: Call scheduled for Monday';
+    const speechOutput = 'Our human advisors don\'t work on the weekend, but we will call you on Monday. Nationwide is on your side.'; 
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'would you like to talk to a human advisor?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
 function handleSessionEndRequest(callback) {
     const cardTitle = 'Session Ended';
-    const speechOutput = 'Thank you using Home Advisor. Nationwide is on your side.';
+    const speechOutput = 'Thank you for using Home Advisor. Nationwide is on your side.';
     // Setting this to true ends the session and exits the skill.
     const shouldEndSession = true;
 
@@ -132,21 +176,60 @@ function whatsMyMonthlyPayment(principal, duration, rate) {
 }
 
 
+//function getMonthlyPayment(intent, session, callback) {
+//    let cardTitle = '';
+//    const principal = intent.slots.principal;
+//    const rate = intent.slots.rate;
+//    const duration = intent.slots.duration;
+//    const sessionAttributes = {
+//        principal, rate, duration
+//    };
+//    const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
+//    const shouldEndSession = false;
+//    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month`;
+//    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+//
+//    callback(sessionAttributes,
+//         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+//}
+
 function getMonthlyPayment(intent, session, callback) {
-    let cardTitle = '';
-    const principal = intent.slots.principal;
-    const rate = intent.slots.rate;
-    const duration = intent.slots.duration;
-    const sessionAttributes = {
-        principal, rate, duration
-    };
-    const monthlyPayment = whatsMyMonthlyPayment(principal, rate, duration);
+    console.log(intent)
+    const sessionAttributes = {};
+    const principal = 75000//intent.slots.principal.value;
+    const rate = 5; //parseInt(intent.slots.rate);
+    const duration = 30; //parseInt(intent.slots.duration);
+    const cardTitle = '30 year mortgage';
+    const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
+    const totalInterest = calculateTotalInterestOnMortgage(principal, duration, rate);
     const shouldEndSession = false;
-    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month`;
-    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest over ${duration} years.`;
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. What were the mortgage parameters?';
 
     callback(sessionAttributes,
-         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+
+function getMonthlyPayment2(intent, session, callback) {
+    console.log(intent)
+    const sessionAttributes = {};
+    const principal = 75000//intent.slots.principal.value;
+    const rate = 5; //parseInt(intent.slots.rate);
+    const duration = 15; //parseInt(intent.slots.duration);
+    const cardTitle = '15 year calculateTotalInterestOnMortgage';
+    const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
+    const totalInterest = calculateTotalInterestOnMortgage(principal, duration, rate);
+    const shouldEndSession = false;
+    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest over ${duration} years.`;
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. What were the mortgage parameters?'
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
 function calculateTotalInterestOnMortgage(principal, duration, rate) {
@@ -162,7 +245,7 @@ function getTotalInterest(intent, session, callback) {
     const sessionAttributes = {
         principal, rate, duration
     };
-    const totalInterest = calculateTotalInterestOnMortgage(principal, rate, duration);
+    const totalInterest = calculateTotalInterestOnMortgage(principal, duration, rate);
     let cardTitle = 'Total Interest: ' + totalInterest;
     const shouldEndSession = false;
     const speechOutput = `You would pay a total of ${totalInterest} dollars in interest over ${duration} years`;
@@ -269,6 +352,12 @@ function onIntent(intentRequest, session, callback) {
         getTotalInterest(intentRequest, session, callback);  
     } else if (intentName === 'howMuchMonthlyPayment') {
         getMonthlyPayment(intentRequest, session, callback);  
+    } else if (intentName === 'soundsLikeAPlan') {
+        getMortgageForPlan(intentRequest, session, callback);  
+    } else if (intentName === 'howMuchMonthlyPaymentDeux') {
+        getMonthlyPayment2(intentRequest, session, callback);  
+    } else if (intentName === 'talkToAdvisor') {
+        getTalkToAdvisor(intentRequest, session, callback);  
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
