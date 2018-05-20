@@ -215,7 +215,7 @@ function getMonthlyPaymentFixed(intent, session, callback) {
     const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
     const totalInterest = calculateTotalInterestOnMortgage(principal, duration, rate);
     const shouldEndSession = false;
-    const speechOutput = `A 30 year mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest over ${duration} years.`;
+    const speechOutput = `A 30 year mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest.`;
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What were the mortgage parameters?';
@@ -235,7 +235,7 @@ function getMonthlyPaymentFixed2(intent, session, callback) {
     const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
     const totalInterest = calculateTotalInterestOnMortgage(principal, duration, rate);
     const shouldEndSession = false;
-    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest over ${duration} years.`;
+    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest.`;
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What were the mortgage parameters?'
