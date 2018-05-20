@@ -132,6 +132,16 @@ function createFavoriteColorAttributes(favoriteColor) {
     };
 }
 
+function whatsMyMonthlyPayment(principal, duration, rate) {
+    var payment = amt*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1);
+    return payment;
+}
+
+function calculateInterestPaymentOnMortgage(principal, duration, rate) {
+    // take the monthly rate and multiple by the number of months of the duration
+    return whatsMyMonthlyPayment(principal, duration, rate) * 12 * duration
+}
+
 /**
  * Sets the color in the session and prepares the speech to reply to the user.
  */
