@@ -1,25 +1,35 @@
 Summary: Nationwide Home Advisor is an Alexa skill that helps you buy your first home from. Start by talking to Home Advisor about the type of home you want to buy, and get a personalized plan to save your down payment.
+ 
+The problem:
+ - Potential home buyers don't know where to start
+ - Getting finances in order is the most difficult and longest part
+ - 
+ - Couldn't get a financial advisor on the phone on the weekend
+
+The solution:
+ - 
+
 Demo: 
 
 G: ask nationwide to help me buy my first home. 
 
-A: Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people ever make. Luckily I work with a great team of financial advisors and we will develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for. What zip code do you want to live in?
+A: Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people will make. Fortunately I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for. What zip code do you want to live in?
 
 G: I am looking for a two bedroom townhouse in nine four three zero one. 
 
-A: Looking at the prices in Zillow for two bedroom townhouses in Palo Alto, the average price is 500,000 dollars. Do you know how much you want to put for a down payment?
+A: Looking at the prices on Zillow for two bedroom townhouses in Palo Alto, the average price is 500,000 dollars. Do you know how much you want to put for a down payment?
 
 G: How much do you recommend?
 
-A: We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for emergencies and unexpected expenses. Can I access your bank account details to design a personalized savings plan?
+A: We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for closing costs and unexpected expenses. Can I access your bank account to design your savings plan?
 
 G: Sure go ahead. 
 
-A: Great, thanks. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?
+A: Accessing now. It looks like you have 50,000 dollars in your savings account. How much of this would you like to use towards the downpayment?
 
 G: All of it
 
-A: Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Let's figure out how to save the additional 75,000. Looking at your monthly account balance over the last year, your savings has been growing at 4,000 dollars per month. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. Do you think you will be able to maintain saving at this rate for 19 months?
+A: Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Your savings has been growing at 4,000 dollars per month over the last year. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. 
 
 G: How long would it take if I only saved 3,500 per month?
 
@@ -27,6 +37,10 @@ A: It will take 21 months to save your down payment.
 
 G: Let's plan for 4,000 a month. 
 
-A: Okay, let's figure out the mortage payments you would make on your new home. When you borrow money to purchase the home, you will need to pay it back with interest. The total amount of interest you will pay is determined by the amount you borrow, the interest rate, and the duration of the loan. Let's try to figure out what you monthly mortage 
+A: Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if anything changes. Let's move onto your mortgage payments. With your credit score and current rates, I expect you will pay five percent interest.
 
-// TODO: mortgage calculator
+G: What is my monthly payment on a seventy five thousand dollar mortgage with a five percent interest rate and a thirty year term?
+
+A: ...
+
+G: What about a 15 year term?

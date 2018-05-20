@@ -49,7 +49,7 @@ function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Nationwide Home Advisor';
-    const speechOutput = `Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people ever make. Luckily I work with a great team of financial advisors and we will develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for. What zip code do you want to live in?`
+    const speechOutput = `Hello Nationwide Hackathon. I am home advisor. Buying a home is the biggest and most complex purchase most people will make. Fortunately I work with a great team of financial advisors and we can develop a personalized plan to help buy your first home. To get started, tell me about the home you are looking for. What zip code do you want to live in?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What zip code do you want to live in?;'
@@ -63,7 +63,7 @@ function getCityNameForZip(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Homes In Palo Alto';
-    const speechOutput = `Looking at the prices on Zillow for two bedroom townhouses in Palo Alto, I see that the average price is 500,000 dollars. Do you know how much you want to put for a down payment?`
+    const speechOutput = `Looking at the prices on Zillow for two bedroom townhouses in Palo Alto, the average price is 500,000 dollars. Do you know how much you want to put for a down payment?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What type of home are you looking for?';
@@ -77,7 +77,7 @@ function getRecommendedDownPayment(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Recommended Down Payment: 20%';
-    const speechOutput = `We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for emergencies and unexpected expenses. Can I access your bank account details to design a personalized savings plan?`
+    const speechOutput = `We recommend a 20% downpayment on your first home purchase, and keeping an additional 5% of funds in reserve for closing costs and unexpected expenses. Can I access your bank account to design your savings plan?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. Can I access bank details?';
@@ -105,10 +105,10 @@ function getSavingsPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Savings Plan: $75,000';
-    const speechOutput = `Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Let's figure out how to save the additional 75,000. Looking at your monthly account balance over the last year, your savings has been growing at 4,000 dollars per month. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. Do you think you will be able to maintain saving at this rate for 19 months?`
+    const speechOutput = `Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Your savings has been growing at 4,000 dollars per month over the last year. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. `
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
-    const repromptText = 'I didn\'t catch that. Can I access bank details?';
+    const repromptText = 'I didn\'t catch that. How much of your savings will you use?';
     const shouldEndSession = false;
 
     callback(sessionAttributes,
@@ -155,7 +155,7 @@ function calculateTotalInterestOnMortgage(principal, duration, rate) {
 }
 
 function getTotalInterest(intent, session, callback) {
-    let cardTitle = '';
+    
     const principal = intent.slots.principal;
     const rate = intent.slots.rate;
     const duration = intent.slots.duration;
@@ -163,6 +163,7 @@ function getTotalInterest(intent, session, callback) {
         principal, rate, duration
     };
     const totalInterest = calculateTotalInterestOnMortgage(principal, rate, duration);
+    let cardTitle = 'Total Interest: ' + totalInterest;
     const shouldEndSession = false;
     const speechOutput = `You would pay a total of ${totalInterest} dollars in interest over ${duration} years`;
     const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
