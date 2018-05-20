@@ -59,6 +59,19 @@ function getWelcomeResponse(callback) {
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
+function getTestIntent(intent, session, callback) {
+    // If we wanted to initialize the session to have some attributes we could add those here.
+    const sessionAttributes = {};
+    const cardTitle = 'Homes In Palo Alto';
+    const speechOutput = `it is: ${intent.name}`
+    // If the user either does not reply to the welcome message or says something that is not
+    // understood, they will be prompted again with this text.
+    const repromptText = 'I didn\'t catch that. What type of home are you looking for?';
+    const shouldEndSession = false;
+
+    callback(sessionAttributes,
+        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
 function getCityNameForZip(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
@@ -176,27 +189,26 @@ function whatsMyMonthlyPayment(principal, duration, rate) {
 }
 
 
-//function getMonthlyPayment(intent, session, callback) {
-//    let cardTitle = '';
-//    const principal = intent.slots.principal;
-//    const rate = intent.slots.rate;
-//    const duration = intent.slots.duration;
-//    const sessionAttributes = {
-//        principal, rate, duration
-//    };
-//    const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
-//    const shouldEndSession = false;
-//    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month`;
-//    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
-//
-//    callback(sessionAttributes,
-//         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
-//}
-
 function getMonthlyPayment(intent, session, callback) {
-    console.log(intent)
+    let cardTitle = '';
+    const principal = intent.slots.principal;
+    const rate = intent.slots.rate;
+    const duration = intent.slots.duration;
+    const sessionAttributes = {
+        principal, rate, duration
+    };
+    const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
+    const shouldEndSession = false;
+    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month`;
+    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+
+    callback(sessionAttributes,
+         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+}
+
+function getMonthlyPaymentFixed(intent, session, callback) {
     const sessionAttributes = {};
-    const principal = 75000//intent.slots.principal.value;
+    const principal = 400000//intent.slots.principal.value;
     const rate = 5; //parseInt(intent.slots.rate);
     const duration = 30; //parseInt(intent.slots.duration);
     const cardTitle = '30 year mortgage';
@@ -216,7 +228,7 @@ function getMonthlyPayment(intent, session, callback) {
 function getMonthlyPayment2(intent, session, callback) {
     console.log(intent)
     const sessionAttributes = {};
-    const principal = 75000//intent.slots.principal.value;
+    const principal = 400000//intent.slots.principal.value;
     const rate = 5; //parseInt(intent.slots.rate);
     const duration = 15; //parseInt(intent.slots.duration);
     const cardTitle = '15 year calculateTotalInterestOnMortgage';
@@ -349,9 +361,13 @@ function onIntent(intentRequest, session, callback) {
     } else if (intentName === 'howMuchForDownPayment') {
         getSavingsPlan(intentRequest, session, callback);
     } else if (intentName === 'howMuchTotalInterest') {
-        getTotalInterest(intentRequest, session, callback);  
+        getTotalInterest(intent, session, callback);  
+    } else if (intentName === 'howMuchMonthlyPayment') {
+        getMonthlyPayment(intent, session, callback);  
     } else if (intentName === 'HowMuchMonthlyPaymentFixed') {
-        getMonthlyPayment(intentRequest, session, callback);  
+        getMonthlyPaymentFixed(intentRequest, session, callback);  
+    } else if (intentName === 'testIntent') {
+        getTestIntent(intent, session, callback); 
     } else if (intentName === 'howMuchMonthlyPaymentDeux') {
         getMonthlyPayment2(intentRequest, session, callback); 
     } else if (intentName === 'soundsLikeAPlan') {
