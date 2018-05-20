@@ -63,24 +63,10 @@ function getCityNameForZip(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Homes In Palo Alto';
-    const speechOutput = `Great, let's look up the average prices in Palo Alto for the type of home you want. Are you looking for a condo, townhouse, or a single family home? How many bedrooms do you want?`
-    // If the user either does not reply to the welcome message or says something that is not
-    // understood, they will be prompted again with this text.
-    const repromptText = 'I didn\'t catch that. What type of home are you looking for?';
-    const shouldEndSession = false;
-
-    callback(sessionAttributes,
-        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
-}
-
-function getInfoForHomeType(intent, session, callback) {
-    // If we wanted to initialize the session to have some attributes we could add those here.
-    const sessionAttributes = {};
-    const cardTitle = '2BR Prices in Palo Alto';
     const speechOutput = `Looking at the prices on Zillow for two bedroom townhouses in Palo Alto, I see that the average price is 500,000 dollars. Do you know how much you want to put for a down payment?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
-    const repromptText = 'I didn\'t catch that. Do you know how much you want to put for a down payment?';
+    const repromptText = 'I didn\'t catch that. What type of home are you looking for?';
     const shouldEndSession = false;
 
     callback(sessionAttributes,
@@ -119,7 +105,7 @@ function getSavingsPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Recommended Down Payment';
-    const speechOutput = `Okay, 50,000 is 40% of the 125,000 dollars we reccomend saving. Let's figure out how to save the additional 75,000. Looking at your monthly account balance over the last year, your savings has been growing at 4,000 dollar per month. If you continue saving 4,000 dollars per month, you will have saved enough for your downpayment in 19 months. Do you think you will be able to maintain saving at this rate for 19 months?`
+    const speechOutput = `Okay, 50,000 dollars is 40% of the 125,000 dollars we reccomend saving. Let's figure out how to save the additional 75,000. Looking at your monthly account balance over the last year, your savings has been growing at 4,000 dollars per month. If you continue saving at this rate, you will have saved enough for your downpayment in 19 months. Do you think you will be able to maintain saving at this rate for 19 months?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. Can I access bank details?';
@@ -233,8 +219,6 @@ function onIntent(intentRequest, session, callback) {
         getWelcomeResponse(callback);
     } else if (intentName === 'likeToLive') {
         getCityNameForZip(intentRequest, session, callback);  
-    } else if (intentName === 'lookupHomeType') {
-        getInfoForHomeType(intentRequest, session, callback);  
     } else if (intentName === 'recommendDownPayment') {
         getRecommendedDownPayment(intentRequest, session, callback);  
     } else if (intentName === 'accessBankAccount') {
