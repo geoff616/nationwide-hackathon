@@ -182,7 +182,7 @@ function handleSessionEndRequest(callback) {
 }
 
 function whatsMyMonthlyPayment(principal, duration, rate) {
-    var amt = principal, 
+    var amt = parseInt(principal), 
         apr  = rate/1200,
         term = duration * 12;
     return Math.round(amt*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1));
@@ -191,16 +191,16 @@ function whatsMyMonthlyPayment(principal, duration, rate) {
 
 function getMonthlyPayment(intent, session, callback) {
     let cardTitle = '';
-    const principal = intent.slots.principal;
-    const rate = intent.slots.rate;
-    const duration = intent.slots.duration;
+    const principal = intent.slots.principal.value;
+    const rate = intent.slots.rate.value;
+    const duration = intent.slots.term.value;
     const sessionAttributes = {
         principal, rate, duration
     };
     const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
     const shouldEndSession = false;
     const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month`;
-    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+    const repromptText = "I didn't catch that.";
 
     callback(sessionAttributes,
          buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
@@ -225,7 +225,7 @@ function getMonthlyPaymentFixed(intent, session, callback) {
 }
 
 
-function getMonthlyPayment2(intent, session, callback) {
+function getMonthlyPaymentFixed2(intent, session, callback) {
     console.log(intent)
     const sessionAttributes = {};
     const principal = 400000//intent.slots.principal.value;
@@ -251,9 +251,9 @@ function calculateTotalInterestOnMortgage(principal, duration, rate) {
 
 function getTotalInterest(intent, session, callback) {
     
-    const principal = intent.slots.principal;
-    const rate = intent.slots.rate;
-    const duration = intent.slots.duration;
+    const principal = parseInt(intent.slots.principal.value);
+    const rate = parseInt(intent.slots.rate.value);
+    const duration = parseInt(intent.slots.term.value);
     const sessionAttributes = {
         principal, rate, duration
     };
@@ -261,65 +261,11 @@ function getTotalInterest(intent, session, callback) {
     let cardTitle = 'Total Interest: ' + totalInterest;
     const shouldEndSession = false;
     const speechOutput = `You would pay a total of ${totalInterest} dollars in interest over ${duration} years`;
-    const repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
+    const repromptText = "I didn't catch that.";
 
     callback(sessionAttributes,
          buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
-
-/**
- * Sets the color in the session and prepares the speech to reply to the user.
-
-function setColorInSession(intent, session, callback) {
-    const cardTitle = intent.name;
-    const favoriteColorSlot = intent.slots.Color;
-    let repromptText = '';
-    let sessionAttributes = {};
-    const shouldEndSession = false;
-    let speechOutput = '';
-
-    if (favoriteColorSlot) {
-        const favoriteColor = favoriteColorSlot.value;
-        sessionAttributes = createFavoriteColorAttributes(favoriteColor);
-        speechOutput = `I now know your favorite color is ${favoriteColor}. You can ask me ` +
-            "your favorite color by saying, what's my favorite color?";
-        repromptText = "You can ask me your favorite color by saying, what's my favorite color?";
-    } else {
-        speechOutput = "I'm not sure what your favorite color is. Please try again.";
-        repromptText = "I'm not sure what your favorite color is. You can tell me your " +
-            'favorite color by saying, my favorite color is red';
-    }
-
-    callback(sessionAttributes,
-         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
-}
-
-function getColorFromSession(intent, session, callback) {
-    let favoriteColor;
-    const repromptText = null;
-    const sessionAttributes = {};
-    let shouldEndSession = false;
-    let speechOutput = '';
-
-    if (session.attributes) {
-        favoriteColor = session.attributes.favoriteColor;
-    }
-
-    if (favoriteColor) {
-        speechOutput = `Your favorite color is ${favoriteColor}. Goodbye.`;
-        shouldEndSession = true;
-    } else {
-        speechOutput = "I'm not sure what your favorite color is, you can say, my favorite color " +
-            ' is red';
-    }
-
-    // Setting repromptText to null signifies that we do not want to reprompt the user.
-    // If the user does not respond or says something that is not understood, the session
-    // will end.
-    callback(sessionAttributes,
-         buildSpeechletResponse(intent.name, speechOutput, repromptText, shouldEndSession));
-}
-**/
 
 // --------------- Events -----------------------
 
@@ -369,7 +315,7 @@ function onIntent(intentRequest, session, callback) {
     } else if (intentName === 'testIntent') {
         getTestIntent(intent, session, callback); 
     } else if (intentName === 'howMuchMonthlyPaymentDeux') {
-        getMonthlyPayment2(intentRequest, session, callback); 
+        getMonthlyPaymentFixed2(intentRequest, session, callback); 
     } else if (intentName === 'soundsLikeAPlan') {
         getMortgageForPlan(intentRequest, session, callback);   
     } else if (intentName === 'talkToAdvisor') {

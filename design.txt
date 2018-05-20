@@ -11,7 +11,17 @@ Benefits:
  - fish where the fish are (avoiding high perssure sales situations)
  - Help potential customers plan for the future
 
-Demo solution:
+Demo G:
+- ask nationwide to help me buy my first home
+- I am looking for a two bedroom townhouse in Palo Alto
+- How much do you recommend?
+- Sure go ahead
+- Let's plan for 4,000 a month
+- What would my monthly payment be?
+- What about a fifteen year term?
+- can I talk to a financial advisor to learn more?
+
+Demo Full:
 
 G: ask nationwide to help me buy my first home. 
 
@@ -41,6 +51,6 @@ G: What about a fifteen year term?
 
 A: Your mortgage would be 593 dollars per month and you would pay a total of 31740 dollars in interest over 15 years.
 
-G: Great, can I talk to a financial advisor to learn more?
+G: can I talk to a financial advisor to learn more?
 
 A: Our human advisors don't work on the weekend, but we will call you on Monday. Nationwide is on your side. 
