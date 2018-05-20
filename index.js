@@ -105,7 +105,7 @@ function getBankAccountInfo(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Bank Balance: $50,000';
-    const speechOutput = `You have 50,000 dollars in your savings account, which is 40% of the proposed plan. Your savings has been growing at 4,000 dollars per month. If you continue at this rate, we will have saved enough for your downpayment in 19 months. `
+    const speechOutput = `You have 50,000 dollars in your savings account, which is 40% of the proposed mortgage. Your savings has been growing at 4,000 dollars per month. If you continue at this rate, we will have saved enough for your downpayment in 19 months. `
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. How much should we use?';
@@ -119,7 +119,7 @@ function getMortgageForPlan(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Mortgage Amount: $75,000 in 19 months';
-    const speechOutput = `Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage payments. With your credit score and current market rates, I expect you will pay five percent interest.`
+    const speechOutput = `Plan saved. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage terms. With your credit score of 750 and current market rates, I expect you will pay five percent interest.`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. Should we proceed with this plan?';
@@ -203,7 +203,7 @@ function getMonthlyPayment(intent, session, callback) {
     const monthlyPayment = whatsMyMonthlyPayment(principal, duration, rate);
     const totalInterest = calculateTotalInterestOnMortgage(principal, duration, rate);
     const shouldEndSession = false;
-    const speechOutput = `Your mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest over ${duration} years.`;
+    const speechOutput = `A 30 year mortgage would be ${monthlyPayment} dollars per month and you would pay a total of ${totalInterest} dollars in interest over ${duration} years.`;
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What were the mortgage parameters?';
@@ -350,12 +350,12 @@ function onIntent(intentRequest, session, callback) {
         getSavingsPlan(intentRequest, session, callback);
     } else if (intentName === 'howMuchTotalInterest') {
         getTotalInterest(intentRequest, session, callback);  
-    } else if (intentName === 'howMuchMonthlyPayment') {
+    } else if (intentName === 'HowMuchMonthlyPaymentFixed') {
         getMonthlyPayment(intentRequest, session, callback);  
-    } else if (intentName === 'soundsLikeAPlan') {
-        getMortgageForPlan(intentRequest, session, callback);  
     } else if (intentName === 'howMuchMonthlyPaymentDeux') {
-        getMonthlyPayment2(intentRequest, session, callback);  
+        getMonthlyPayment2(intentRequest, session, callback); 
+    } else if (intentName === 'soundsLikeAPlan') {
+        getMortgageForPlan(intentRequest, session, callback);   
     } else if (intentName === 'talkToAdvisor') {
         getTalkToAdvisor(intentRequest, session, callback);  
     } else if (intentName === 'AMAZON.HelpIntent') {

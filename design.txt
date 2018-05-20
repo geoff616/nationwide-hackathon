@@ -22,17 +22,17 @@ A: We recommend a 20% downpayment on your first home purchase, plus an additiona
 
 G: Sure go ahead. 
 
-A: You have 50,000 dollars in your savings account, which is 40% of the proposed plan. Your savings has been growing at 4,000 dollars per month. If you continue at this rate, we will have saved enough for your downpayment in 19 months. 
+A: You have 50,000 dollars in your savings account, which is 40% of the proposed mortgage. Your savings has been growing at 4,000 dollars per month. If you continue at this rate, we will have saved enough for your downpayment in 19 months. 
 
 G: Let's plan for 4,000 a month. 
 
-A: Sounds like a good plan. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage payments. With your credit score and current market rates, I expect you will pay five percent interest.
+A: Plan saved. You can ask me about your saving progress at any time, and we can update your plan if circumstances change. Let's move onto your mortgage terms. With your credit score of 750 and current market rates, I expect you will pay five percent interest.
 
-G: What is my monthly payment on a seventy five thousand dollar mortgage with a five percent interest rate and a thirty year term?
+G: What would my monthly payment be?
 
 A: Your mortgage would be 403 dollars per month and you would pay a total of 70080 dollars in interest.
 
-G: What about a 15 year term?
+G: What about a fifteen year term?
 
 A: Your mortgage would be 593 dollars per month and you would pay a total of 31740 dollars in interest over 15 years.
 
