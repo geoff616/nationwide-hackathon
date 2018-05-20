@@ -59,11 +59,11 @@ function getWelcomeResponse(callback) {
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
-function getCityNameForZip(callback) {
+function getCityNameForZip(intent, session, callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     const sessionAttributes = {};
     const cardTitle = 'Prices in Palo Alto';
-    const speechOutput = `Great, let's look up the average prices in Palo Alto for the type of home you want. Are you looking for a condo, townhouse, or a single family home? How many bedrooms do you want? `
+    const speechOutput = `Great, let's look up the average prices in Palo Alto for the type of home you want. Are you looking for a condo, townhouse, or a single family home? How many bedrooms do you want?`
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
     const repromptText = 'I didn\'t catch that. What type of home are you looking for?;'
@@ -174,7 +174,7 @@ function onIntent(intentRequest, session, callback) {
     if (intentName === 'buyFirstHomeInit') {
         getWelcomeResponse(callback);
     } else if (intentName === 'likeToLive') {
-        getCityNameForZip(callback);  
+        getCityNameForZip(intentRequest, session, callback);  
     } else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     } else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
